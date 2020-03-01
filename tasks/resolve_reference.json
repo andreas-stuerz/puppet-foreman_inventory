@@ -8,17 +8,17 @@
     "page": {
       "description": "The page to return",
       "type": "Optional[Integer]",
-      "default": 1
+      "default": "1"
     },
     "per_page": {
       "description": "Number of results per page to return",
       "type": "Optional[Integer]",
-      "default": 1000
+      "default": "1000"
     },
     "pw_prompt": {
       "description": "Should the programm prompt for the foreman passsword?",
       "type": "Optional[Boolean]",
-      "default": false
+      "default": "false"
     },
     "hammer_cli_bin": {
       "description": "The base path under which the hammer is installed.",
