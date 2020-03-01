@@ -1,0 +1,29 @@
+{
+  "description": "Query foreman for a list of hosts to use as bolt inventory targets",
+  "parameters": {
+    "query": {
+      "description": "The query to search for hosts in foreman",
+      "type": "String"
+    },
+    "page": {
+      "description": "The page to return",
+      "type": "Optional[Integer]",
+      "default": 1
+    },
+    "per_page": {
+      "description": "Number of results per page to return",
+      "type": "Optional[Integer]",
+      "default": 1000
+    },
+    "pw_prompt": {
+      "description": "Should the programm prompt for the foreman passsword?",
+      "type": "Optional[Boolean]",
+      "default": false
+    },
+    "hammer_cli_bin": {
+      "description": "The base path under which the hammer is installed.",
+      "type": "Optional[String]",
+      "default": "~/.gem/ruby/2.5.0/bin/hammer"
+    }
+  }
+}
