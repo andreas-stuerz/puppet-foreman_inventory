@@ -1,10 +1,12 @@
 {
   "name": "andeman-foreman_inventory",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "author": "Andreas Stürz",
   "summary": "A task to generate Bolt inventory from foreman",
   "license": "Apache-2.0",
-  "source": "",
+  "source": "https://github.com/andeman/puppet-foreman_inventory",
+  "project_page": "https://github.com/andeman/puppet-foreman_inventory",
+  "issues_url": "https://github.com/andeman/puppet-foreman_inventory/issues",
   "dependencies": [
 
   ],
