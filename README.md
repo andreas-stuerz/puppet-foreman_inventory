@@ -22,6 +22,12 @@ More information about foreman: https://theforeman.org/
 
 
 ### Install requirements
+Make sure you have the following packages installed:
+
+``` text
+git curl libssl-dev libreadline-dev zlib1g-dev autoconf bison build-essential libyaml-dev libreadline-dev libncurses5-dev libffi-dev libgdbm-dev
+```
+
 For install the needed requirements into bolt:
 
 ``` text
@@ -65,7 +71,7 @@ vi ~/.hammer/cli.modules.d/foreman.yml
 
 chmod 600 ~/.hammer/cli.modules.d/foreman.yml
 
-hammer --fetch-ca-cert <FOREMAN_FQDN>
+~/.gem/ruby/2.5.0/bin/hammer --fetch-ca-cert https://<FOREMAN_FQDN>/
 ``` 
 
 ## Usage
