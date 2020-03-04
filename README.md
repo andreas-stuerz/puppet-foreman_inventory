@@ -66,7 +66,7 @@ chmod 600 ~/.hammer/cli.modules.d/foreman.yml
 
 ## Usage
 
-The plugin supports looking up hosts managed via foreman through the command `hammer host lists`.
+The plugin supports looking up hosts managed via foreman through the command `hammer host lists.
 
 Required fields:
 -   `query`: Foreman Filter query for hosts. (Example: "managed=true")
@@ -81,9 +81,19 @@ Optional fields:
 
 ### Examples
 
-Common usage:
+**Common usage:**
 
 Query foreman server and use a bolt pkcs7 secret as foreman password.
+
+Create a bolt secret with the following command:
+```
+bolt secret encrypt YOUR_FOREMAN_PASSWORD
+```
+
+Make sure you fetch the CA certificate for the foreman server:
+```
+~/.gem/ruby/2.5.0/bin/hammer --fetch-ca-cert https://foreman.example.de/
+```
 
 More information about bolt secrets:
 https://puppet.com/docs/bolt/latest/using_plugins.html#secret-plugins
@@ -103,6 +113,8 @@ groups:
             <FOREMAN_PASSWORD_SECRET>        
 
 ```
+
+**Another example:**
 
 Hammer is installed under `/usr/local/bin/hammer`. The file `~/.hammer/cli.modules.d/foreman.yml` contains the forman server_url, username and passord.
 We also want to show the second half of 100 servers.
