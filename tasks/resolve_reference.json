@@ -15,11 +15,6 @@
       "type": "Optional[Integer]",
       "default": "1000"
     },
-    "pw_prompt": {
-      "description": "Should the programm prompt for the foreman passsword?",
-      "type": "Optional[Boolean]",
-      "default": "false"
-    },
     "server_url": {
       "description": "URL to access foreman e.g. https://foreman.example.com",
       "type": "Optional[String[1]]"

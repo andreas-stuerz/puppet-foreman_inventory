@@ -77,7 +77,6 @@ Optional fields:
 -   `password`: Password for foreman. Overrides pw_prompt. (defaults to `''`)
 -   `per_page`: Limit results for the foreman search query (default to `1000`)
 -   `page`: Show filter page (default to `1`)
--   `pw_prompt`: Securely ask for the foreman password? (default to `false`)
 -   `hammer_cli_bin`: The binary path of the hammer (default to `~/.gem/ruby/2.5.0/bin/hammer`)
 
 ### Examples

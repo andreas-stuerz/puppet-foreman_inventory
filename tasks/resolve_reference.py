@@ -10,14 +10,11 @@ import os
 import sys
 import subprocess
 import shlex
-from getpass import getpass
 
 params = json.load(sys.stdin)
 query = params['query']
 page = params.get('page', 1)
 per_page = params.get('per_page', 1000)
-pw_prompt = params.get('pw_prompt', False)
-
 server_url = params.get('server_url', '')
 username = params.get('username', '')
 password = params.get('password', '')
@@ -27,10 +24,6 @@ hammer_cli_bin = os.path.expanduser(params.get('hammer_cli_bin', '~/.gem/ruby/2.
 
 targets = []
 exitcode = 0
-
-if pw_prompt:
-    pw_input = getpass('[Foreman] Password: ')
-    password = ("--password %s" % pw_input)
 
 if server_url:
     server_url = ("-s %s" % server_url)
