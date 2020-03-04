@@ -22,7 +22,7 @@ server_url = params.get('server_url', '')
 username = params.get('username', '')
 password = params.get('password', '')
 
-hammer_cli_bin = params.get('hammer_cli_bin', '~/.gem/ruby/2.5.0/bin/hammer')
+hammer_cli_bin = os.path.expanduser(params.get('hammer_cli_bin', '~/.gem/ruby/2.5.0/bin/hammer'))
 
 targets = []
 exitcode = 0
@@ -40,7 +40,6 @@ if username:
 if password:
     password = ("-p %s" % password)
 
-
 def make_error(msg, code, type = "error"):
     error = {
         "_error": {
@@ -51,8 +50,12 @@ def make_error(msg, code, type = "error"):
     }
     return error
 
-command = "%s %s --no-headers --output csv host list --search '%s' --per-page %d --page %d --fields name" \
-          % (os.path.expanduser(hammer_cli_bin), password, query, per_page, page)
+# TODO: fetch cacert if server_url is given and its a https url
+
+
+
+command = "%s %s %s %s --no-headers --output csv host list --search '%s' --per-page %d --page %d --fields name" \
+          % (hammer_cli_bin, server_url, username, password, query, per_page, page)
 args = shlex.split(command)
 
 p = subprocess.Popen(args, shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
