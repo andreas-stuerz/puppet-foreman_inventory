@@ -18,7 +18,6 @@ per_page = params.get('per_page', 1000)
 server_url = params.get('server_url', '')
 username = params.get('username', '')
 password = params.get('password', '')
-fetch_ca_cert = params.get('fetch_ca_cert', True)
 
 hammer_cli_bin = os.path.expanduser(params.get('hammer_cli_bin', '~/.gem/ruby/2.5.0/bin/hammer'))
 
