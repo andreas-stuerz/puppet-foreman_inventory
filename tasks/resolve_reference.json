@@ -20,6 +20,19 @@
       "type": "Optional[Boolean]",
       "default": "false"
     },
+    "server_url": {
+      "description": "URL to access foreman e.g. https://foreman.example.com",
+      "type": "Optional[String[1]]"
+    },
+    "username": {
+      "description": "Username to access foreman",
+      "type": "Optional[String[1]]"
+    },
+    "password": {
+      "description": "Password for foreman",
+      "type": "Optional[String[1]]",
+      "sensitive": true
+    },
     "hammer_cli_bin": {
       "description": "The base path under which the hammer is installed.",
       "type": "Optional[String]",

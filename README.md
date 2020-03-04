@@ -28,13 +28,13 @@ Make sure you have the following packages installed:
 git curl libssl-dev libreadline-dev zlib1g-dev autoconf bison build-essential libyaml-dev libreadline-dev libncurses5-dev libffi-dev libgdbm-dev
 ```
 
-For install the needed requirements into bolt:
+Install the needed requirements into bolt:
 
 ``` text
 /opt/puppetlabs/bolt/bin/gem install --user-install hammer_cli_foreman
 ```
 
-Find the install diretory of the hammer cli bin (referenced as $INSTALL_DIR):
+Find the installation diretory of the hammer cli bin (referenced as $INSTALL_DIR):
 
 ``` text
 /opt/puppetlabs/bolt/bin/gem list -d hammer_cli_foreman | grep "Installed at"
