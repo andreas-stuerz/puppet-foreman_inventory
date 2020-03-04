@@ -29,7 +29,7 @@
       "type": "Optional[String[1]]"
     },
     "password": {
-      "description": "Password for foreman",
+      "description": "Password for foreman. Overrides pw_prompt.",
       "type": "Optional[String[1]]",
       "sensitive": true
     },

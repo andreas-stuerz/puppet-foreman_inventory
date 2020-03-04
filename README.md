@@ -22,6 +22,9 @@ More information about foreman: https://theforeman.org/
 
 
 ### Install requirements
+You can skip this steps if you already have the requirements installed. Just make sure you specify the path to hammer 
+in the parameter **hammer_cli_bin**.
+
 Make sure you have the following packages installed:
 
 ``` text
@@ -55,33 +58,23 @@ To enable and configure the foreman plugin execute the following steps:
 
 ``` 
 mkdir -p ~/.hammer/cli.modules.d
-
 for i in `gem contents hammer_cli|grep cli_config.template.yml`; do cp $i  ~/.hammer/.; done
-
 mv ~/.hammer/cli_config.template.yml ~/.hammer/cli_config.yml
-
-vi ~/.hammer/cli.modules.d/foreman.yml
-[...]
-:foreman:
-  :enable_module: true
-  :host: 'https://<FOREMAN_FQDN>/'
-  :username: '<FOREMAN_USER>'
-  :password: <FORMAN_PASSWORD>
-[...]
-
+echo ":foreman:\n  :enable_module: true" > ~/.hammer/cli.modules.d/foreman.yml
 chmod 600 ~/.hammer/cli.modules.d/foreman.yml
-
-~/.gem/ruby/2.5.0/bin/hammer --fetch-ca-cert https://<FOREMAN_FQDN>/
 ``` 
 
 ## Usage
 
-The plugin supports looking up hosts managed via foreman through the command "hammer host lists".
+The plugin supports looking up hosts managed via foreman through the command `hammer host lists.
 
 Required fields:
 -   `query`: Foreman Filter query for hosts. (Example: "managed=true")
 
 Optional fields:
+-   `server_url`: URL to access foreman (defaults to `''`)
+-   `username`: Username to access foreman (defaults to `''`)
+-   `password`: Password for foreman. Overrides pw_prompt. (defaults to `''`)
 -   `per_page`: Limit results for the foreman search query (default to `1000`)
 -   `page`: Show filter page (default to `1`)
 -   `pw_prompt`: Securely ask for the foreman password? (default to `false`)
@@ -91,6 +84,11 @@ Optional fields:
 
 Common usage:
 
+Query foreman server and use a bolt pkcs7 secret as foreman password.
+
+More information about bolt secrets:
+https://puppet.com/docs/bolt/latest/using_plugins.html#secret-plugins
+
 `inventory.yaml`
 ```yaml
 groups:
@@ -98,11 +96,16 @@ groups:
     targets:
       - _plugin: foreman_inventory
         query: "os = CentOS and managed=true"
+        server_url: "https://foreman.example.de/"
+        username: 'username'
+        password:
+          _plugin: pkcs7
+          encrypted_value: |
+            <FOREMAN_PASSWORD_SECRET>        
 
 ```
 
-Hammer cli is installed globally under /usr/local/bin/hammer. 
-The file ~/.hammer/cli.modules.d/foreman.yml has no password configured. So we want to ask for it each time.
+Hammer is installed under `/usr/local/bin/hammer`. The file `~/.hammer/cli.modules.d/foreman.yml` contains the forman server_url, username and passord.
 We also want to show the second half of 100 servers.
 
 `inventory.yaml`
@@ -113,8 +116,27 @@ groups:
       - _plugin: foreman_inventory
         query: "os = CentOS and managed=true"
         hammer_cli_bin: '/usr/local/bin/hammer'
-        pw_prompt: true
         per_page: 50
         page: 2
 ```
 
+### Know Issues
+
+CA Certificate for foreman server specified in `server_url` is missing:
+```
+Error executing plugin foreman_inventory from resolve_reference in foreman_inventory: SSL certificate verification failed
+Make sure you configured the correct URL and have the server's CA certificate installed on your system.
+
+You can use hammer to fetch the CA certificate from the server. Be aware that hammer cannot verify whether the certificate is correct and you should verify its authenticity after downloading it.
+
+Download the certificate as follows:
+
+  $ hammer --fetch-ca-cert https://foreman.example.de/
+```
+
+Solution:
+
+Fetch the certificate with the hammer binary specified in `hammer_cli_bin`
+```
+~/.gem/ruby/2.5.0/bin/hammer --fetch-ca-cert https://foreman.example.de
+```

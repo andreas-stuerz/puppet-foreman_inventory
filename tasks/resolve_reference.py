@@ -21,6 +21,7 @@ pw_prompt = params.get('pw_prompt', False)
 server_url = params.get('server_url', '')
 username = params.get('username', '')
 password = params.get('password', '')
+fetch_ca_cert = params.get('fetch_ca_cert', True)
 
 hammer_cli_bin = os.path.expanduser(params.get('hammer_cli_bin', '~/.gem/ruby/2.5.0/bin/hammer'))
 
@@ -49,10 +50,6 @@ def make_error(msg, code, type = "error"):
         }
     }
     return error
-
-# TODO: fetch cacert if server_url is given and its a https url
-
-
 
 command = "%s %s %s %s --no-headers --output csv host list --search '%s' --per-page %d --page %d --fields name" \
           % (hammer_cli_bin, server_url, username, password, query, per_page, page)
