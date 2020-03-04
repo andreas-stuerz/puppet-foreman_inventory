@@ -66,7 +66,7 @@ chmod 600 ~/.hammer/cli.modules.d/foreman.yml
 
 ## Usage
 
-The plugin supports looking up hosts managed via foreman through the command `hammer host lists.
+The plugin supports looking up hosts managed via foreman through the command `hammer host lists`.
 
 Required fields:
 -   `query`: Foreman Filter query for hosts. (Example: "managed=true")
