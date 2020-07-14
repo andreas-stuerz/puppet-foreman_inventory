@@ -8,12 +8,12 @@
     "page": {
       "description": "The page to return",
       "type": "Optional[Integer]",
-      "default": "1"
+      "default": 1
     },
     "per_page": {
       "description": "Number of results per page to return",
       "type": "Optional[Integer]",
-      "default": "1000"
+      "default": 1000
     },
     "server_url": {
       "description": "URL to access foreman e.g. https://foreman.example.com",
