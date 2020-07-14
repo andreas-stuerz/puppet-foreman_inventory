@@ -1,6 +1,6 @@
 {
   "name": "andeman-foreman_inventory",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "author": "Andreas Stürz",
   "summary": "A task to generate Bolt inventory from foreman",
   "license": "Apache-2.0",
