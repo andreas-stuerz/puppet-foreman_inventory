@@ -49,6 +49,10 @@ args = shlex.split(command)
 
 p = subprocess.Popen(args, shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 output,error = p.communicate()
+try:
+    output = output.decode("utf-8")
+except AttributeError:
+    pass
 if output:
     for target in output.split("\n"):
         if target:
